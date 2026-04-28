@@ -1,0 +1,137 @@
+/* Dasar */
+body { font-family: 'Segoe UI', sans-serif; background: #e9ecef; margin: 0; padding: 10px; }
+
+/* Container untuk form */
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Form groups */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus, select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}
+
+/* Tombol submit */
+.btn-submit {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-submit:hover {
+    background: #218838;
+}
+
+/* Nav links */
+.nav-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.nav-links a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Error box */
+.error-box {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Container untuk halaman lain */
+.container-large { 
+    max-width: 1000px; 
+    margin: 20px auto; 
+    background: white; 
+    padding: 20px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+}
+
+/* Tabel Responsif */
+.table-responsive {
+    overflow-x: auto; /* Memungkinkan scroll horizontal di HP */
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Mencegah tabel terlalu menciut */
+}
+
+th, td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+th { background-color: #007bff; color: white; }
+tr:hover { background-color: #f8f9fa; }
+
+/* Tombol */
+.btn-action {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Media Query untuk Layar Kecil (Mobile) */
+@media (max-width: 600px) {
+    .container { padding: 20px; width: 95%; margin: 20px auto; }
+    .container-large { padding: 15px; width: 95%; }
+    h2 { font-size: 1.2rem; }
+    .user-info { font-size: 0.9rem; width: 100%; margin-top: 10px; }
+}
