@@ -8,10 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
-{
-    /**
-     * Tampilkan halaman login.
-     */
+{   /*Tampilan Log-in*/
     public function showLoginForm()
     {
         if (Auth::check()) {
@@ -20,35 +17,32 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    /**
-     * Proses login pengguna.
-     */
+    /*Proses Logic-Login*/
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required|email|min:3|max:50',
-            'password' => 'required|min:3|max:50'
+            'email' => 'required|email|min:5|max:50',
+            'password' => 'required|min:8|max:50'
         ], [
-            'email.required' => 'Email wajib diisi.',
-            'email.email' => 'Format email tidak valid.',
-            'password.required' => 'Password wajib diisi.',
+            'email.required' => 'Email Wajib',
+            'email.email' => 'Format Email Tidak Valid',
+            'password.required' => 'Password Wajib Diisi',
+            'password.min' => 'Password Minimal 8 Karakter',
         ]);
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
             return redirect()->intended('/todo')
-                ->with('success', 'Selamat datang kembali, ' . Auth::user()->name . '!');
+                ->with('success', 'Selamat Datang, ' . Auth::user()->name . ':)');
         }
 
         return back()->withErrors([
-            'email' => 'Email atau password yang Anda masukkan salah.',
+            'email' => 'Email atau Password Salah, Silahkan Coba Lagi',
         ])->onlyInput('email');
     }
 
-    /**
-     * Tampilkan halaman registrasi.
-     */
+    /*Tampilan Registrasi*/
     public function showRegisterForm()
     {
         if (Auth::check()) {
@@ -57,9 +51,7 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    /**
-     * Proses registrasi pengguna baru.
-     */
+    /*Proses Logic-Registrasi*/
     public function register(Request $request)
     {
         $request->validate([
@@ -90,9 +82,7 @@ class AuthController extends Controller
         return redirect()->route('todo')->with('success', 'Registrasi berhasil! Selamat datang.');
     }
 
-    /**
-     * Proses logout.
-     */
+    /*Proses Log-Out*/
     public function logout(Request $request)
     {
         Auth::logout();

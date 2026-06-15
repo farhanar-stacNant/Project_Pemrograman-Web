@@ -7,9 +7,7 @@ use Illuminate\Http\JsonResponse;
 
 class TodoApiController extends Controller
 {
-    /**
-     * Mengembalikan data statistik Todo dalam format JSON.
-     */
+    /*Mengembalikan Data Statistik dalam Format yang Disepakati (To-Do)*/
     public function getStats(): JsonResponse
     {
         $total = Todo::count();

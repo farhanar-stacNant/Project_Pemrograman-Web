@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+    /*Run the migrations*/
     public function up(): void
     {
         Schema::create('jobs', function (Blueprint $table) {
@@ -45,11 +43,10 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+
+    /*Rollback the migrations*/
     public function down(): void
-    {
+    {   
         Schema::dropIfExists('jobs');
         Schema::dropIfExists('job_batches');
         Schema::dropIfExists('failed_jobs');
