@@ -1,7 +1,6 @@
 <?php
-
-return [
-
+return
+[
     /*Pengaturan Default (Mail)*/    
     'default' => env('MAIL_MAILER', 'log'),
 
@@ -26,7 +25,7 @@ return [
 
         'postmark' => [
             'transport' => 'postmark',
-
+        ],
         'resend' => [
             'transport' => 'resend',
         ],
@@ -68,5 +67,4 @@ return [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
-
 ];
