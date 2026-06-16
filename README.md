@@ -1,66 +1,105 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <a href="https://laravel.com" target="_blank">
+    <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="300" alt="Laravel Logo">
+  </a>
 </p>
 
-## About Laravel
+<h1 align="center">🚀 PHP To-Do Application - Data Peserta Proyek 🚀</h1>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+  <strong>Pengembangan Lanjutan Sistem Manajemen Data Peserta Berbasis Framework Laravel 11</strong><br>
+  Tugas Pemrograman Web - Laporan LK-10 📝
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<hr>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<h2>📌 I. Deskripsi Proyek</h2>
+<p>
+  Proyek ini merupakan aplikasi web manajemen data (To-Do List / Data Peserta) yang dibangun menggunakan <strong>Laravel 11</strong>. Pada versi terbaru ini, fokus utama pengembangan terletak pada peningkatan aspek sekuritas menggunakan integrasi sistem autentikasi modern berbasis <strong>WorkOS Auth Scaffolding</strong> untuk mengamankan <i>routing</i> fungsional (CRUD). Selain itu, proyek ini juga menyediakan layanan <i>endpoint</i> API mandiri berformat JSON.
+</p>
+<p>
+  🔗 <strong>Link Repository GitHub:</strong> <a href="https://github.com/farhanar-stacNant/Project_Pemrograman-Web.git" target="_blank">Project_Pemrograman-Web.git</a>
+</p>
 
-## Learning Laravel
+<h2>🔒 II. Checklist Keamanan Dasar Aplikasi Web</h2>
+<p>Berikut adalah tabel evaluasi penerapan parameter keamanan (OWASP Top 10 Awareness Level) yang ada di dalam sistem ini:</p>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr bgcolor="#f2f2f2">
+      <th>No</th>
+      <th>Parameter Evaluasi Keamanan</th>
+      <th>Status</th>
+      <th>Komponen / Lapisan Kode Terkait</th>
+      <th>Keterangan Teknis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Autentikasi Pengguna</td>
+      <td><strong>Sesuai</strong></td>
+      <td>Laravel Auth Scaffolding / WorkOS Breeze</td>
+      <td>Mencegah pengguna anonim mengakses data tanpa sesi terverifikasi.</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Proteksi Route (Authorization)</td>
+      <td><strong>Sesuai</strong></td>
+      <td><code>routes/web.php</code> via <code>auth</code> middleware</td>
+      <td>Membatasi hak akses CRUD (/peserta /todos) hanya untuk user yang sukses login.</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Pencegahan SQL Injection</td>
+      <td><strong>Sesuai</strong></td>
+      <td>Eloquent ORM (PDO Parameter Binding)</td>
+      <td>Menggunakan mekanisme built-in Laravel untuk memisahkan instruksi SQL dengan data input.</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Pencegahan Cross-Site Scripting (XSS)</td>
+      <td><strong>Sesuai</strong></td>
+      <td>Blade Echo Template engine <code>{{ $variable }}</code></td>
+      <td>Secara otomatis melakukan <i>escaping</i> terhadap karakter HTML berbahaya.</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Proteksi CSRF</td>
+      <td><strong>Sesuai</strong></td>
+      <td>Directive <code>@csrf</code> pada Form input</td>
+      <td>Menyisipkan token token rahasia untuk memvalidasi request dari form internal aplikasi.</td>
+    </tr>
+  </tbody>
+</table>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+<h2>🛠️ III. Mekanisme Keamanan Utama (Arsitektur Kode)</h2>
+<ul>
+  <li>
+    <strong>Mencegah SQL Injection:</strong> Interaksi database sepenuhnya dikelola oleh Eloquent ORM. Semua query menggunakan <i>PDO parameter binding</i> otomatis, sehingga input teks user tidak akan pernah bisa dieksekusi sebagai perintah SQL ilegal.
+  </li>
+  <li>
+    <strong>Mencegah Cross-Site Scripting (XSS):</strong> Menampilkan data pada view menggunakan syntax dua kurung kurawal <code>{{ $peserta->nama }}</code>. Laravel otomatis merubah karakter khusus seperti <code>&lt;</code> dan <code>&gt;</code> menjadi teks biasa, sehingga skrip injeksi berbahaya akan gagal berjalan di browser.
+  </li>
+  <li>
+    <strong>Sistem Proteksi Route (Middleware):</strong> Mengunci semua rute fungsional CRUD di dalam file <code>routes/web.php</code>. Pengguna tanpa login yang mencoba menembak URL secara ilegal akan otomatis terlempar kembali ke halaman <code>/login</code>.
+  </li>
+  <li>
+    <strong>Penyediaan Endpoint API JSON:</strong> Aplikasi menyediakan jalur khusus di dalam <code>routes/api.php</code> untuk mengembalikan data mentah berformat JSON standar yang valid.
+  </li>
+</ul>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<h2>⚙️ IV. Cara Menjalankan Aplikasi di Lokal</h2>
+<p>Ikuti langkah berikut untuk menyalakan proyek di perangkat lokal kamu:</p>
+<ol>
+  <li>Clone repositori proyek ini ke dalam folder lokal web server komputer.</li>
+  <li>Duplikat file konfigurasi lingkungan dengan perintah: <code>cp .env.example .env</code></li>
+  <li>Lakukan instalasi dependensi vendor lewat composer: <code>composer install</code></li>
+  <li>Buat kunci enkripsi aplikasi baru: <code>php artisan key:generate</code></li>
+  <li>Sesuaikan pengaturan nama database lokal pada baris <code>DB_DATABASE</code> di dalam file <code>.env</code>.</li>
+  <li>Jalankan proses migrasi struktur tabel: <code>php artisan migrate</code></li>
+  <li>Nyalakan server lokal Laravel: <code>php artisan serve</code></li>
+</ol>
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<hr>
+<p align="center">🌟 <i>Proyek ini diselesaikan guna memenuhi standar pemenuhan kompetensi tugas praktikum pemrograman web modern.</i> 🌟</p>
